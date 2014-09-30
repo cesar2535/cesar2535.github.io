@@ -15,9 +15,10 @@ html.no-js
     meta(name='viewport', content='width=device-width, initial-scale=1')
     // Place favicon.ico and apple-touch-icon.png in the root directory
     link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700,200italic,400italic' rel='stylesheet' type='text/css')
-    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')  
+    link(href='stylesheets/vendor/normalize.css', rel='stylesheet')
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')  
     script.
-      window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\\/script>')
+      window.jQuery || document.write('<script src="js/vendor/jquery-2.1.1.min.js"><\\/script>')
   body
     //if lt IE 7
       p.browsehappy
@@ -28,3 +29,5 @@ html.no-js
         |  to improve your experience.
     // Add your site or application content here
     include views/includes/navbar.jade
+    include views/profile.jade
+    include views/includes/footer.jade
