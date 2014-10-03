@@ -6,7 +6,7 @@ doctype html
 //if IE 8
   html.no-js.lt-ie9  
 // [if gt IE 8] <!
-html.no-js
+html.no-js(ng-app='myApp')
   head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
@@ -19,6 +19,8 @@ html.no-js
     script(src='//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')  
     script.
       window.jQuery || document.write('<script src="js/vendor/jquery-2.1.1.min.js"><\\/script>')
+    script(src='js/lib/angular.min.js')
+    
   body
     //if lt IE 7
       p.browsehappy
