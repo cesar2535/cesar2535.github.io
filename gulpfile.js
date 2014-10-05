@@ -5,7 +5,11 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var jade = require('gulp-jade');
 var compass = require('gulp-compass');
+var jshint = require('gulp-jshint');
+var stylish = require('jshint-stylish');
 var gutil = require('gulp-util');
+var changed = require('gulp-changed');
+var plumber = require('gulp-plumber');
 var del = require('del');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
@@ -29,6 +33,12 @@ var buildDir = {
 
 var publicDir = './_public';
 
+// Compile Error handler
+var onError = function(err) {
+  gutil.log(gutil.colors.yellow(err.message));
+  browserSync.notify(err.message, 5000);
+};
+
 // Clear the build directory
 gulp.task('clear', function() {
   del.sync('./build');
@@ -43,6 +53,10 @@ gulp.task('lib', function() {
 // Views files
 gulp.task('jade-views', function() {
   return gulp.src(srcFiles.views)
+    .pipe(plumber({
+      errorHandler: onError
+    }))
+    .pipe(changed(buildDir.html, {extension: '.html'}))
     .pipe(jade({pretty: true}))
     .pipe(gulp.dest(buildDir.html));
 });
@@ -50,6 +64,76 @@ gulp.task('jade-views', function() {
 // Index file
 gulp.task('jade-index',['jade-views'], function() {
   return gulp.src(srcFiles.index)
+    .pipe(plumber({
+      errorHandler: onError
+    }))
+    .pipe(changed(buildDir.html, {extension: '.html'}))
     .pipe(jade({pretty: true}))
     .pipe(gulp.dest(buildDir.html));
 });
+
+// Compass Compile
+gulp.task('compass', function() {
+  var stream = gulp.src(srcFiles.style)
+    .pipe(compass({
+      css: 'build/stylesheets',
+      sass: 'src/sass',
+      require: ['susy'],
+    })).on('error', function(err) {
+      gutil.log(gutil.colors.yellow(err.message));
+      browserSync.notify(err.message, 5000);
+      stream.end();
+    })
+    .pipe(gulp.dest(buildDir.style))
+    .pipe(reload({stream: true}));
+  return stream;
+});
+
+gulp.task('lint', function() {
+  return gulp.src(srcFiles.js)
+    .pipe(plumber({
+      errorHandler: onError
+    }))
+    .pipe(changed(buildDir.js, {extension: '.js'}))
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
+    .pipe(gulp.dest(buildDir.js));
+});
+
+// Run Server
+gulp.task('browser-sync',['build'], function() {
+  browserSync({
+    server: {
+      baseDir: './build'
+    },
+    port: 8080,
+  });
+});
+
+// Watched files
+gulp.task('watch', function() {
+  gulp.watch(srcFiles.js, ['lint']);
+  gulp.watch(srcFiles.style, ['compass']);
+  gulp.watch(srcFiles.views, ['jade-views']);
+  gulp.watch(srcFiles.index, ['jade-index']);
+});
+
+// Livereload
+var watchFolder = ['./build/**/*.html', './build/**/*.js'];
+gulp.task('livereload',['watch', 'browser-sync'], function() {
+  gulp.watch(watchFolder, function(file) {
+    if (file.type === 'changed')
+      return reload(file.path);
+  });
+});
+
+// Copy file in build directory
+gulp.task('copy',['build'], function() {
+  return gulp.src('./build/**', {base: './build'})
+    .pipe(gulp.dest(publicDir));
+});
+
+gulp.task('compile',['clear', 'lib', 'jade-index', 'lint', 'compass']);
+gulp.task('build',['compile']);
+gulp.task('default',['build', 'livereload']);
+gulp.task('publish',['build', 'copy']);
