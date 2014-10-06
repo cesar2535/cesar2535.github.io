@@ -26,7 +26,8 @@ var srcFiles = {
 };
 
 var buildDir = {
-  html: './build',
+  index: './build',
+  views: './build/views',
   js: './build/js',
   style: './build/stylesheets'
 };
@@ -47,7 +48,7 @@ gulp.task('clear', function() {
 // Copy assets' files to build directroy
 gulp.task('lib', function() {
   return gulp.src(srcFiles.assets.files, {base: srcFiles.assets.base})
-    .pipe(gulp.dest(buildDir.html));
+    .pipe(gulp.dest(buildDir.index));
 });
 
 // Views files
@@ -56,9 +57,9 @@ gulp.task('jade-views', function() {
     .pipe(plumber({
       errorHandler: onError
     }))
-    .pipe(changed(buildDir.html, {extension: '.html'}))
+    .pipe(changed(buildDir.views, {extension: '.html'}))
     .pipe(jade({pretty: true}))
-    .pipe(gulp.dest(buildDir.html));
+    .pipe(gulp.dest(buildDir.views));
 });
 
 // Index file
@@ -67,9 +68,9 @@ gulp.task('jade-index',['jade-views'], function() {
     .pipe(plumber({
       errorHandler: onError
     }))
-    .pipe(changed(buildDir.html, {extension: '.html'}))
+    .pipe(changed(buildDir.index, {extension: '.html'}))
     .pipe(jade({pretty: true}))
-    .pipe(gulp.dest(buildDir.html));
+    .pipe(gulp.dest(buildDir.index));
 });
 
 // Compass Compile
