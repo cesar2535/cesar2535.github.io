@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/cesar2535/cesar2535.github.io/issues"
   },
-  "homepage": "https://github.com/cesar2535/cesar2535.github.io"
+  "homepage": "https://github.com/cesar2535/cesar2535.github.io",
+  "devDependencies": {
+    "webpack": "^1.7.2",
+    "webpack-dev-server": "^1.7.0"
+  }
 }
