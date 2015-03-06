@@ -3,7 +3,7 @@ var extensions = ['', '.jsx'];
 module.exports = {
   entry: './entry.js',
   output: {
-    path: __dirname,
+    path: './build',
     filename: 'bundle.js'
   },
   module: {
@@ -14,6 +14,9 @@ module.exports = {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'jsx-loader'
+    }, {
+      test: /\.(png|jpg|jpeg|gif|svg)$/,
+      loader: 'file-loader'
     }]
   },
   resolve: {
