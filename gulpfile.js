@@ -1,23 +1,24 @@
-var gulp = require('gulp');
+var gulp        = require('gulp');
 
-var rename = require('gulp-rename');
-var uglify = require('gulp-uglify');
-var concat = require('gulp-concat');
-var jade = require('gulp-jade');
-var compass = require('gulp-compass');
-var jshint = require('gulp-jshint');
-var stylish = require('jshint-stylish');
-var gutil = require('gulp-util');
-var changed = require('gulp-changed');
-var plumber = require('gulp-plumber');
-var del = require('del');
+var rename      = require('gulp-rename');
+var uglify      = require('gulp-uglify');
+var concat      = require('gulp-concat');
+var jade        = require('gulp-jade');
+var compass     = require('gulp-compass');
+var jshint      = require('gulp-jshint');
+var stylish     = require('jshint-stylish');
+var gutil       = require('gulp-util');
+var changed     = require('gulp-changed');
+var sourcemaps  = require('gulp-sourcemaps');
+var plumber     = require('gulp-plumber');
+var del         = require('del');
 var browserSync = require('browser-sync');
-var reload = browserSync.reload;
+var reload      = browserSync.reload;
 
 var srcFiles = {
   index: './src/index.jade',
   views: './src/views/**/*.jade',
-  js: './src/js/**/*.js',
+  js: './src/scripts/**/*.js',
   style: './src/sass/**/*.sass',
   assets: {
     files: './src/assets/**',
@@ -28,7 +29,7 @@ var srcFiles = {
 var buildDir = {
   index: './build',
   views: './build/views',
-  js: './build/js',
+  js: './build/scripts',
   style: './build/stylesheets'
 };
 
@@ -96,8 +97,16 @@ gulp.task('lint', function() {
       errorHandler: onError
     }))
     .pipe(changed(buildDir.js, {extension: '.js'}))
+    .pipe(sourcemaps.init())
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))
+    .pipe(concat('app.js'))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(uglify({ compress: true }))
+    .pipe(sourcemaps.write({
+      addComment: true,
+      sourceRoot: '/src/scripts'
+    }))
     .pipe(gulp.dest(buildDir.js));
 });
 
