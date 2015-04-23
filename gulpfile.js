@@ -16,24 +16,25 @@ var browserSync = require('browser-sync');
 var reload      = browserSync.reload;
 
 var srcFiles = {
-  index: './src/index.jade',
-  views: './src/views/**/*.jade',
-  js: './src/scripts/**/*.js',
-  style: './src/sass/**/*.sass',
+  index: 'src/index.jade',
+  // views: 'src/views/**/*.jade',
+  views: 'src/**/*.jade',
+  js: 'src/scripts/**/*.js',
+  style: 'src/sass/**/*.sass',
   assets: {
-    files: './src/assets/**',
-    base: './src/assets'
+    files: 'src/assets/**',
+    base: 'src/assets'
   }
 };
 
 var buildDir = {
-  index: './build',
-  views: './build/views',
-  js: './build/scripts',
-  style: './build/stylesheets'
+  index: 'build',
+  views: 'build/views',
+  js: 'build/scripts',
+  style: 'build/stylesheets'
 };
 
-var publicDir = './_public';
+var publicDir = '_public';
 
 // Compile Error handler
 var onError = function(err) {
@@ -96,7 +97,7 @@ gulp.task('lint', function() {
     .pipe(plumber({
       errorHandler: onError
     }))
-    .pipe(changed(buildDir.js, {extension: '.js'}))
+    // .pipe(changed(buildDir.js, {extension: '.js'}))
     .pipe(sourcemaps.init())
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))
