@@ -4,7 +4,53 @@ html
     meta(charset="UTF-8")
     meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
     link(rel="icon", sizes="16x16 32x32", href="/favicon.ico?v=2")
+    link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")
     link(rel="stylesheet", href="stylesheets/style.css")
     title Cesar Chen
   body
+    header.header
+      ul.languages
+        li
+          a(href="./zh_tw") 中文
+      .container
+        .title
+          a.logo(href="./")
+            h1 Cesar Chen
+          h2.description Front-End Developer & Designer
+    #main
+      .container
+        section.about
+          .title
+            h3 About
+          .content
+        section.experience
+          .title
+            h3 Experiences
+          .content
+        section.skill
+          .title
+            h3 Skills
+          .content
+        section.portfolio
+          .title
+            h3 Portfolio
+          .content
+        section.other
+          .title
+            h3 Others
+          .content
+    footer.footer
+      .container
+        nav#links
+          a(href="https://tw.linkedin.com/in/cesarchen", target="_blank") Linkedin
+          span /
+          a(href="https://github.com/cesar2535", target="_blank") Github
+          span /
+          a(href="https://twitter.com/vantiskelador", target="_blank") Twitter
+          span /
+          a(href="https://www.facebook.com/vantis.chen", target="_blank") Facebook
+          span /
+          a(href="", target="_blank") Email
+    script(src="//code.jquery.com/jquery-1.11.2.min.js")
+    script(src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
     script(src="scripts/app.min.js")
