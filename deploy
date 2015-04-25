@@ -11,7 +11,7 @@ upstream=origin
 npm i
 rm -fr _public
 
-git clone $REPO -b gh-pages _public
+git clone $REPO -b master _public
 
 REV=`git describe --always`
 gulp publish
@@ -19,5 +19,5 @@ gulp publish
 cd _public
 git add -A .
 git commit -m "regen for $REV"
-git push origin gh-pages
+git push origin master
 cd ..
