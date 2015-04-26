@@ -661,6 +661,7 @@ footer.footer {
 footer.footer #links {
   color: #999;
   text-align: center;
+  word-wrap: break-word;
 }
 footer.footer #links a {
   color: #999;
