@@ -629,6 +629,23 @@ header.header .languages a {
   padding: 5px;
   display: block;
 }
+header.header .logo {
+  width: 80vw;
+  padding: 10px;
+  margin: 0 auto;
+  display: block;
+}
+@media (min-width: 48em) {
+  header.header .logo {
+    width: 480px;
+  }
+}
+header.header .logo path {
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
 
 footer.footer {
   background-color: #eee;
