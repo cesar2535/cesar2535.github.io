@@ -647,6 +647,10 @@ header.header .logo path {
   transition-duration: 0.3s;
 }
 
+#signature {
+  visibility: hidden;
+}
+
 footer.footer {
   background-color: #eee;
   padding-top: 30px;
