@@ -19,7 +19,7 @@ html
           h2.description 網頁前端開發 & 設計
     #main
       .container
-        section.about
+        section.about(data-sr="")
           .title
             h3 關於
           .content
@@ -29,19 +29,19 @@ html
               | ，喜歡創造高互動的網頁應用。
             p
               | 善於發現問題、解決問題。
-        section.experience
+        section.experience(data-sr="")
           .title
             h3 經歷
           .content
-        section.skill
+        section.skill(data-sr="")
           .title
             h3 技能
           .content
-        section.portfolio
+        section.portfolio(data-sr="")
           .title
             h3 作品
           .content
-        section.other
+        section.other(data-sr="")
           .title
             h3 其他
           .content
@@ -60,4 +60,7 @@ html
     script(src="//code.jquery.com/jquery-1.11.2.min.js")
     script(src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
     script(src="//cdn.jsdelivr.net/vivus/0.2.1/vivus.min.js")
-    script(src="../scripts/app.min.js")
+    script(src="/scripts/scrollReveal.min.js")
+    script(src="/scripts/app.min.js")
+    script.
+      window.sr = new scrollReveal();
