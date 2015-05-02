@@ -1,4 +1,7 @@
 (function () {
+  'use strict';
+  
+  window.sr = new scrollReveal();
 
   if ($('#signature').length > 0) {
     var signature = new Vivus('signature', {type: 'oneByOne', duration: 200, start: 'manual'}, function (event) {
