@@ -55,11 +55,11 @@ const postCSSLoaderOptions = {
   // https://github.com/facebook/create-react-app/issues/2677
   ident: 'postcss',
   plugins: () => [
+    require('postcss-easy-import'),
     require('rucksack-css'),
     require('postcss-calc'),
-    require('postcss-nesting'),
     require('postcss-url'),
-    require('postcss-easy-import'),
+    require('postcss-nesting'),
     require('postcss-flexbugs-fixes'),
     autoprefixer({
       flexbox: 'no-2009',

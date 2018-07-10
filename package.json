@@ -118,9 +118,13 @@
     "webpack-manifest-plugin": "^2.0.3"
   },
   "dependencies": {
+    "bootstrap": "^4.1.1",
+    "normalize.css": "^8.0.0",
     "object-assign": "^4.1.1",
     "promise": "^8.0.1",
     "raf": "^3.4.0",
+    "scrollreveal": "^3.4.0",
+    "vivus": "^0.4.4",
     "whatwg-fetch": "^2.0.4"
   }
 }
