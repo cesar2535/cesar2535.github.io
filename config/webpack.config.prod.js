@@ -356,7 +356,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       inject: true,
-      template: 'public/zh_tw.html',
+      template: 'public/zh_tw/index.html',
       filename: 'zh_tw/index.html',
       minify: {
         removeComments: true,

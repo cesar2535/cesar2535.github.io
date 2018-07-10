@@ -302,7 +302,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       inject: true,
-      template: 'public/zh_tw.html',
+      template: 'public/zh_tw/index.html',
       filename: 'zh_tw/index.html'
     }),
     // Add module names to factory functions so they appear in browser profiler.
