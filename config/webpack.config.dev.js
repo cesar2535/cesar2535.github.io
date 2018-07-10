@@ -300,6 +300,11 @@ module.exports = {
       inject: true,
       template: paths.appHtml,
     }),
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: 'public/zh_tw.html',
+      filename: 'zh_tw/index.html'
+    }),
     // Add module names to factory functions so they appear in browser profiler.
     new webpack.NamedModulesPlugin(),
     // Makes some environment variables available to the JS code, for example:

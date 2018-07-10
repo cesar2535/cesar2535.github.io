@@ -7,6 +7,8 @@ import './styles/styles.css'
 
 window.sr = new ScrollReveal()
 
+window.sr.reveal('section')
+
 if (document.querySelectorAll('#signature').length > 0) {
   const signature = new Vivus(
     'signature',
