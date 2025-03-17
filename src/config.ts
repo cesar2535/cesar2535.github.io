@@ -5,7 +5,7 @@ export const SITE: Site = {
   author: "Cesar Chen",
   profile: "https://satnaing.dev/",
   desc: "explore, engage, and evolve",
-  title: "Devforge",
+  title: "Mimizuku's nest",
   ogImage: undefined,
   lightAndDarkMode: true,
   postPerIndex: 4,
