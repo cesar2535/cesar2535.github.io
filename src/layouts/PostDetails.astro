@@ -1,13 +1,14 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
-import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime";
-import type { CollectionEntry } from "astro:content";
-import { slugifyStr } from "@utils/slugify";
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
 import ShareLinks from "@components/ShareLinks.astro";
+import Tag from "@components/Tag.astro";
 import { SITE } from "@config";
+import Layout from "@layouts/Layout.astro";
+import { slugifyStr } from "@utils/slugify";
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
 
 export interface Props {
   post: CollectionEntry<"blog">;
@@ -28,7 +29,7 @@ const {
   editPost,
 } = post.data;
 
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
 const ogUrl = new URL(
@@ -49,12 +50,12 @@ const layoutProps = {
 
 /* ========== Prev/Next Posts ========== */
 
-const allPosts = posts.map(({ data: { title }, slug }) => ({
-  slug,
+const allPosts = posts.map(({ data: { title }, id }) => ({
+  id,
   title,
 }));
 
-const currentPostIndex = allPosts.findIndex(a => a.slug === post.slug);
+const currentPostIndex = allPosts.findIndex(a => a.id === post.id);
 
 const prevPost = currentPostIndex !== 0 ? allPosts[currentPostIndex - 1] : null;
 const nextPost =
@@ -119,7 +120,7 @@ const nextPost =
       {
         prevPost && (
           <a
-            href={`/posts/${prevPost.slug}`}
+            href={`/posts/${prevPost.id}`}
             class="flex w-full gap-1 hover:opacity-75"
           >
             <svg
@@ -147,7 +148,7 @@ const nextPost =
       {
         nextPost && (
           <a
-            href={`/posts/${nextPost.slug}`}
+            href={`/posts/${nextPost.id}`}
             class="flex w-full justify-end gap-1 text-right hover:opacity-75 sm:col-start-2"
           >
             <div>
